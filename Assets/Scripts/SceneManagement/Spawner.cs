@@ -22,7 +22,10 @@ public class Spawner : MonoBehaviour
             temporary = Instantiate(raiders[randomNumber],new Vector3(randomNumberX,0,spawnArea.position.z), new Quaternion(0,180,0,0));
             temporary.SetActive(false);
             temporary.transform.SetParent(enemiesParent.transform);
-            temporary.GetComponent<Unit>().IsDead = false;
+            temporary.AddComponent<EnemyUnit>();
+            temporary.AddComponent<EnemyAnimations>();
+            temporary.AddComponent<EnemyAttackScript>();
+            if(randomNumber == 0) temporary.AddComponent<MeleeWarriorScript>();
             pooledObjects.Add(temporary);
         }
         Spawn(0);
@@ -43,7 +46,7 @@ public class Spawner : MonoBehaviour
     }
     IEnumerator SpawnerCountDown(int number)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         pooledObjects[number].SetActive(true);
         Spawn(number+1);
     }

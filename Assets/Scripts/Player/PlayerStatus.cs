@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    [SerializeField] private int mana;
+    [SerializeField] internal int mana;
     [SerializeField] private GameObject swordsMan;
     [SerializeField] private GameObject crossbowMan;
+    
+    private ManaBarScript manaBarScript;
     // Start is called before the first frame update
     void Start()
     {
         mana = 0;
         ManaLoader();
+        manaBarScript = GameObject.FindObjectOfType<ManaBarScript>();
+        InvokeRepeating("ManaLoader",1,1);
     }
 
     // Update is called once per frame
@@ -23,20 +27,28 @@ public class PlayerStatus : MonoBehaviour
     {
         if(card.name == "SwordsMan")
         {
-            GameObject temporary = Instantiate(swordsMan,new Vector3(cardPosition.x,1,cardPosition.z),Quaternion.identity);
+            if(mana >= 3)
+            {
+                GameObject temporary = Instantiate(swordsMan,new Vector3(cardPosition.x,1,cardPosition.z),Quaternion.identity);
+                temporary.AddComponent<AllyUnit>();
+                temporary.AddComponent<AllyAnimations>();
+                temporary.AddComponent<AllyAttackScript>();
+                temporary.AddComponent<MeleeWarriorScript>();
+                mana = mana - 3;
+                manaBarScript.ResetMana();
+            }
+            else
+            {
+                Debug.Log("Mana yok.");
+            }
         }
     }
     private void ManaLoader()
     {
-        if(mana < 5)
+        
+        if(mana < 6)
         {
-            StartCoroutine(ManaLoaderCountDown());
+            mana++;
         }
-    }
-    IEnumerator ManaLoaderCountDown()
-    {
-        yield return new WaitForSeconds(1);
-        mana++;
-        ManaLoader();
     }
 }

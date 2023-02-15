@@ -17,7 +17,7 @@ public class DragAndDrop : MonoBehaviour,IDragHandler,IEndDragHandler
     {
         startPosition = transform.position;
     }
-
+    //Kart sürüklenirken farenin pozzisyonunu alma.
     public void OnDrag(PointerEventData eventData)
     {
         if(RectTransformUtility.ScreenPointToWorldPointInRectangle(draggingObjectRectTransform,eventData.position,eventData
@@ -27,7 +27,7 @@ public class DragAndDrop : MonoBehaviour,IDragHandler,IEndDragHandler
             spawnArea = globalMousePosition;
         }
     }
-
+    //Kart bırakılınca seçilen kartın bilgilerini ve kartın pozisyonunu diğer scripte göndermek
     public void OnEndDrag(PointerEventData eventData)
     {
         draggingObjectRectTransform.position = startPosition;
