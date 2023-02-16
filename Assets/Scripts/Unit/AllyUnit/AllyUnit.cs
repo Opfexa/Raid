@@ -55,6 +55,7 @@ public class AllyUnit : Unit,IUnit
             
         }
         return closestEnemy;
+    
     }
     
     public void Movement(GameObject enemy)
@@ -72,10 +73,33 @@ public class AllyUnit : Unit,IUnit
     }
     public void CheckDeath()
     {
-        if(GetComponent<MeleeWarriorScript>().health <= 0)
+        if(gameObject.GetComponent<MeleeWarriorScript>() != null)
         {
-            Destroy(gameObject);
-            IsDead = true;
+            
+            if(gameObject.GetComponent<MeleeWarriorScript>().health <= 0)
+            {
+                
+                Destroy(gameObject);
+                IsDead = true;
+            }
+        }
+        if(gameObject.GetComponent<RangedWarriorScript>() != null)
+        {
+            if(gameObject.GetComponent<RangedWarriorScript>().health <= 0)
+            {
+                
+                Destroy(gameObject);
+                IsDead = true;
+            }
+        }
+        if(gameObject.GetComponent<AerialUnitScript>() != null)
+        {
+            if(gameObject.GetComponent<AerialUnitScript>().health <= 0)
+            {
+                
+                Destroy(gameObject);
+                IsDead = true;
+            }
         }
         if(IsDead)
         {

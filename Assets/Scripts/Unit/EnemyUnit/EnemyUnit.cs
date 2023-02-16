@@ -76,10 +76,33 @@ public class EnemyUnit : Unit,IUnit
         {
             Array.Clear(enemys,0,enemys.Length);
         }
-        if(GetComponent<MeleeWarriorScript>().health <= 0)
+        if(gameObject.GetComponent<MeleeWarriorScript>() != null)
         {
-            gameObject.SetActive(false);
-            IsDead = true;
+            
+            if(gameObject.GetComponent<MeleeWarriorScript>().health <= 0)
+            {
+                
+                gameObject.SetActive(false);
+                IsDead = true;
+            }
+        }
+        if(gameObject.GetComponent<RangedWarriorScript>() != null)
+        {  
+            if(gameObject.GetComponent<RangedWarriorScript>().health <= 0)
+            {
+                
+                gameObject.SetActive(false);
+                IsDead = true;
+            }
+        }
+        if(gameObject.GetComponent<AerialUnitScript>() != null)
+        {  
+            if(gameObject.GetComponent<AerialUnitScript>().health <= 0)
+            {
+                
+                gameObject.SetActive(false);
+                IsDead = true;
+            }
         }
     }
     private void OnTriggerEnter(Collider other) 

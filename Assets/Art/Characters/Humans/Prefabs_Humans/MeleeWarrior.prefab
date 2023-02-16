@@ -990,6 +990,7 @@ GameObject:
   - component: {fileID: 8975658812122363005}
   - component: {fileID: 3309363565206913652}
   - component: {fileID: 4147111355073434968}
+  - component: {fileID: -1877708391865872498}
   m_Layer: 0
   m_Name: MeleeWarrior
   m_TagString: Untagged
@@ -1087,6 +1088,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1877708391865872498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782702501690864755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23156345036cf6b4ca810fdf22586154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 10
+  health: 30
 --- !u!1 &1789272960074739661
 GameObject:
   m_ObjectHideFlags: 0

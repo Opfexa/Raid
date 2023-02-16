@@ -6,10 +6,11 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private float gameCountDownValue;
     [SerializeField] private TextMeshProUGUI countDownTimerValue;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class Timer : MonoBehaviour
         else if(gameCountDownValue < 0)
         {
             Time.timeScale = 0;
-            WinGame();
+            gameManager.WinGame();
         }
     }
     private void CountDown()
@@ -33,8 +34,5 @@ public class Timer : MonoBehaviour
             gameCountDownValue -= Time.deltaTime;
         }
     }
-    internal void WinGame()
-    {
-        Debug.Log("Kazandin");
-    }
+    
 }

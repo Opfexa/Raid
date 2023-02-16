@@ -13,7 +13,18 @@ public class EnemyAttackScript : MonoBehaviour
     {
         enemyUnit = GetComponent<EnemyUnit>();
         enemyAnimations = GetComponent<EnemyAnimations>();
-        attackDistance = 7;
+        if(GetComponent<MeleeWarriorScript>() != null)
+        {
+            attackDistance = 7;
+        }
+        if(GetComponent<RangedWarriorScript>() != null)
+        {
+            attackDistance = 150;
+        }
+        if(GetComponent<AerialUnitScript>() != null)
+        {
+            attackDistance = 150;
+        }
     }
 
     // Update is called once per frame
@@ -34,8 +45,15 @@ public class EnemyAttackScript : MonoBehaviour
         if(distance <= attackDistance)
         {
             enemyUnit.IsOnFight = true;
-            transform.LookAt(enemyUnit.currentEnemy.transform);
-            enemyAnimations.Attack();
+            if(gameObject.GetComponent<AerialUnitScript>() == null)
+            {
+                enemyAnimations.Attack();
+                transform.LookAt(new Vector3(enemyUnit.currentEnemy.transform.position.x,1,enemyUnit.currentEnemy.transform.position.z));
+            }
+            if(gameObject.GetComponent<AerialUnitScript>() != null)
+            {
+                gameObject.GetComponent<AerialUnitScript>().Attack();
+            }
         }
         else
         {

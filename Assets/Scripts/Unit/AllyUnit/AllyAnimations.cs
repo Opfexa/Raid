@@ -20,14 +20,18 @@ public class AllyAnimations : MonoBehaviour
     }
     private void Animations()
     {
-        if(unitScript.IsRunning)
+        if(gameObject.GetComponent<AerialUnitScript>() == null)
         {
-            unitAnimator.SetBool("IsRunning", true);
+            if(unitScript.IsRunning)
+            {
+                unitAnimator.SetBool("IsRunning", true);
+            }
+            else
+            {
+                unitAnimator.SetBool("IsRunning", false);
+            }
         }
-        else
-        {
-            unitAnimator.SetBool("IsRunning", false);
-        }
+        
     }
     internal void Attack()
     {

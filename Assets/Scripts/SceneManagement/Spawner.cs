@@ -17,15 +17,17 @@ public class Spawner : MonoBehaviour
         GameObject temporary;
         for (int i = 0; i < sizeOfWave; i++)
         {
-            int randomNumber = Random.Range(0,1);
+            int randomNumber = Random.Range(0,3);
             int randomNumberX = Random.Range(-10,11);
             temporary = Instantiate(raiders[randomNumber],new Vector3(randomNumberX,0,spawnArea.position.z), new Quaternion(0,180,0,0));
             temporary.SetActive(false);
             temporary.transform.SetParent(enemiesParent.transform);
             temporary.AddComponent<EnemyUnit>();
-            temporary.AddComponent<EnemyAnimations>();
+            if(randomNumber < 2)
+            {
+                temporary.AddComponent<EnemyAnimations>();
+            }
             temporary.AddComponent<EnemyAttackScript>();
-            if(randomNumber == 0) temporary.AddComponent<MeleeWarriorScript>();
             pooledObjects.Add(temporary);
         }
         Spawn(0);
