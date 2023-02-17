@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
 public class EnemyUnit : Unit,IUnit
 {
     [SerializeField] public GameObject[]enemys;
@@ -23,6 +22,7 @@ public class EnemyUnit : Unit,IUnit
     void Update()
     {
         CheckDeath();
+        
     }
     private void FixedUpdate() 
     {
@@ -32,6 +32,10 @@ public class EnemyUnit : Unit,IUnit
     public GameObject FindClosestEnemy()
     {
         enemys = GameObject.FindGameObjectsWithTag("Ally");
+        if(gameObject.GetComponent<MeleeWarriorScript>() != null)
+        {
+            enemys = Array.FindAll(enemys, c => !c.GetComponent<AerialUnitScript>());
+        }
         GameObject closestEnemy = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -59,7 +63,7 @@ public class EnemyUnit : Unit,IUnit
     
     public void Movement(GameObject enemy)
     {
-        if(enemy != null && !IsOnFight)
+         if(enemy != null && !IsOnFight)
         {
             agent.destination = enemy.transform.position;
             IsRunning = true;
@@ -104,14 +108,5 @@ public class EnemyUnit : Unit,IUnit
                 IsDead = true;
             }
         }
-    }
-    private void OnTriggerEnter(Collider other) 
-    {
-        if(other.gameObject.tag == "Sword" && other.GetComponent<SwordScript>().parent.tag == "Ally")
-        {
-            GameObject enemy = other.GetComponent<SwordScript>().parent;
-            int takenDamage =enemy.GetComponent<MeleeWarriorScript>().attackDamage;
-            enemyAttackScript.TakeDamage(takenDamage);
-        } 
     }
 }

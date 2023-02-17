@@ -15,7 +15,7 @@ public class AllyAttackScript : MonoBehaviour
         allyAnimations = GetComponent<AllyAnimations>();
         if(GetComponent<MeleeWarriorScript>() != null)
         {
-            attackDistance = 7;
+            attackDistance = 10;
         }
         if(GetComponent<RangedWarriorScript>() != null)
         {
@@ -48,7 +48,7 @@ public class AllyAttackScript : MonoBehaviour
             if(gameObject.GetComponent<AerialUnitScript>() == null)
             {
                 allyAnimations.Attack();
-                transform.LookAt(new Vector3(allyUnit.currentEnemy.transform.position.x,1,allyUnit.currentEnemy.transform.position.z));
+                transform.LookAt(new Vector3(allyUnit.currentEnemy.transform.position.x,0,allyUnit.currentEnemy.transform.position.z));
             }
             if(gameObject.GetComponent<AerialUnitScript>() != null)
             {
@@ -58,14 +58,6 @@ public class AllyAttackScript : MonoBehaviour
         else
         {
             allyUnit.IsOnFight = false;
-        }
-    }
-    internal void TakeDamage(int damageCount)
-    {
-        if(GetComponent<MeleeWarriorScript>() != null)
-        {
-            MeleeWarriorScript meleeWarriorScript = GetComponent<MeleeWarriorScript>();
-            meleeWarriorScript.health = meleeWarriorScript.health - damageCount;
         }
     }
 }

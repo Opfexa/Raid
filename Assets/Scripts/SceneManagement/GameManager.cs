@@ -20,14 +20,18 @@ public class GameManager : MonoBehaviour
     internal void WinGame()
     {
         Debug.Log("Kazandin");
+        WinScreen.SetActive(true);
         Time.timeScale = 0;
     }
     internal void LoseGame()
     {
+        LoseScreen.SetActive(true);
         Debug.Log("Kaybettin");
+        Time.timeScale = 0;
     }
     internal void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 }

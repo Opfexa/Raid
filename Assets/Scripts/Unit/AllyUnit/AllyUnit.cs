@@ -31,6 +31,10 @@ public class AllyUnit : Unit,IUnit
     public GameObject FindClosestEnemy()
     {
         enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        if(gameObject.GetComponent<MeleeWarriorScript>() != null)
+        {
+            enemys = Array.FindAll(enemys, c => !c.GetComponent<AerialUnitScript>());
+        }
         GameObject closestEnemy = null;
         float distance = Mathf.Infinity;
         Vector3 position = transform.position;
@@ -106,13 +110,5 @@ public class AllyUnit : Unit,IUnit
             Array.Clear(enemys,0,enemys.Length);
         }
     }
-    private void OnTriggerEnter(Collider other) 
-    {
-        if(other.gameObject.tag == "Sword" && other.GetComponent<SwordScript>().parent.tag == "Enemy")
-        {
-            GameObject enemy = other.GetComponent<SwordScript>().parent;
-            int takenDamage =enemy.GetComponent<MeleeWarriorScript>().attackDamage;
-            allyAttackScript.TakeDamage(takenDamage); 
-        }
-    }
+    
 }

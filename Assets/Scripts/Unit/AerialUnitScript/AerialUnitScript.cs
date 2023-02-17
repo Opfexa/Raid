@@ -15,12 +15,16 @@ public class AerialUnitScript : MonoBehaviour
     [SerializeField] private Transform arrowCreatePoint;
     [SerializeField] private GameObject createdArrow;
     [SerializeField] private bool canAttack;
+    private HealthBar healthBar;
+    
     private void Start() 
     {
+        healthBar = GetComponentInChildren<HealthBar>();
         arrowList = new List<GameObject>();
         arrowNumber = 0;
         FillArrowSlot();
         canAttack = true;
+        healthBar.SetMaxValue();
     }
     private void FillArrowSlot()
     {
@@ -56,6 +60,7 @@ public class AerialUnitScript : MonoBehaviour
             {
                 arrowList[arrowNumber].SetActive(true);
                 arrowList[arrowNumber].transform.DOMove(currentEnemy.transform.position,0.2f).SetEase(Ease.OutSine);
+                
             }
             arrowNumber++;
         }
@@ -84,6 +89,11 @@ public class AerialUnitScript : MonoBehaviour
             StartCoroutine(AttackCountDown());
         }
         
+    }
+    internal void TakeDamage()
+    {
+        health = health - 10;
+        healthBar.SetValue();
     }
     IEnumerator AttackCountDown()
     {

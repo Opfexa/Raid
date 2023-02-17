@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject enemiesParent;
     [SerializeField] private int powerOfWave;
     [SerializeField] Transform spawnArea;
+    [SerializeField] internal float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,19 +37,22 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(speed > 1)
+        speed -= 0.03f * Time.deltaTime;
     }
     private void Spawn(int nextEnemyIndex)
     {
         if(nextEnemyIndex <= pooledObjects.Count - 1)
         {
-            StartCoroutine(SpawnerCountDown(nextEnemyIndex));
+            Debug.Log(nextEnemyIndex);
+            StartCoroutine(SpawnerCountDown(nextEnemyIndex,speed));
         }
         
     }
-    IEnumerator SpawnerCountDown(int number)
+    
+    IEnumerator SpawnerCountDown(int number, float speed)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(speed);
         pooledObjects[number].SetActive(true);
         Spawn(number+1);
     }

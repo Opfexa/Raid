@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class EnemyAttackScript : MonoBehaviour
 {
     private EnemyUnit enemyUnit;
@@ -15,7 +14,7 @@ public class EnemyAttackScript : MonoBehaviour
         enemyAnimations = GetComponent<EnemyAnimations>();
         if(GetComponent<MeleeWarriorScript>() != null)
         {
-            attackDistance = 7;
+            attackDistance = 10;
         }
         if(GetComponent<RangedWarriorScript>() != null)
         {
@@ -48,7 +47,7 @@ public class EnemyAttackScript : MonoBehaviour
             if(gameObject.GetComponent<AerialUnitScript>() == null)
             {
                 enemyAnimations.Attack();
-                transform.LookAt(new Vector3(enemyUnit.currentEnemy.transform.position.x,1,enemyUnit.currentEnemy.transform.position.z));
+                transform.LookAt(new Vector3(enemyUnit.currentEnemy.transform.position.x,0,enemyUnit.currentEnemy.transform.position.z));
             }
             if(gameObject.GetComponent<AerialUnitScript>() != null)
             {
@@ -60,12 +59,5 @@ public class EnemyAttackScript : MonoBehaviour
             enemyUnit.IsOnFight = false;
         }
     }
-    internal void TakeDamage(int damageCount)
-    {
-        if(GetComponent<MeleeWarriorScript>() != null)
-        {
-            MeleeWarriorScript meleeWarriorScript = GetComponent<MeleeWarriorScript>();
-            meleeWarriorScript.health = meleeWarriorScript.health - damageCount;
-        }
-    }
+    
 }

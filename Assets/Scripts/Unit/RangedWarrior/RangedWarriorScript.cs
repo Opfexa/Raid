@@ -15,11 +15,14 @@ public class RangedWarriorScript : MonoBehaviour
     [SerializeField] private GameObject currentEnemy;
     [SerializeField] private Transform arrowCreatePoint;
     [SerializeField] private GameObject createdArrow;
+    [SerializeField] private HealthBar healthBar;
     private void Start() 
     {
+        healthBar = GetComponentInChildren<HealthBar>();
         arrowList = new List<GameObject>();
         arrowNumber = 0;
         FillArrowSlot();
+        healthBar.SetMaxValue();
     }
     private void FillArrowSlot()
     {
@@ -55,6 +58,7 @@ public class RangedWarriorScript : MonoBehaviour
             {
                 arrowList[arrowNumber].SetActive(true);
                 arrowList[arrowNumber].transform.DOMove(currentEnemy.transform.position,0.2f).SetEase(Ease.OutSine);
+                
             }
             arrowNumber++;
         }
@@ -73,5 +77,10 @@ public class RangedWarriorScript : MonoBehaviour
                 arrow.transform.position = arrowCreatePoint.position;
             }
         }
+    }
+    internal void TakeDamage()
+    {
+        health = health -10 ;
+        healthBar.SetValue();
     }
 }

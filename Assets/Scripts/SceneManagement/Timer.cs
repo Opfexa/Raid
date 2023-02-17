@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private float gameCountDownValue;
+    [SerializeField] internal float gameCountDownValue;
     [SerializeField] private TextMeshProUGUI countDownTimerValue;
     private GameManager gameManager;
     // Start is called before the first frame update

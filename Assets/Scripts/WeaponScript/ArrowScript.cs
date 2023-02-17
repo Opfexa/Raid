@@ -16,15 +16,15 @@ public class ArrowScript : MonoBehaviour
             }
             if(other.gameObject.GetComponent<RangedWarriorScript>() != null)
             {
-                other.gameObject.GetComponent<RangedWarriorScript>().health -= 10;
+                other.gameObject.GetComponent<RangedWarriorScript>().TakeDamage();
             }
             if(other.gameObject.GetComponent<MeleeWarriorScript>() != null)
             {
-                other.gameObject.GetComponent<MeleeWarriorScript>().health -= 10;
+                other.gameObject.GetComponent<MeleeWarriorScript>().TakeDamage();
             }
             if(other.gameObject.GetComponent<AerialUnitScript>() != null)
             {
-                other.gameObject.GetComponent<AerialUnitScript>().health -= 10;
+                other.gameObject.GetComponent<AerialUnitScript>().TakeDamage();
             }
         }
         if(gameObject.transform.parent.tag == "Ally" && other.gameObject.tag == "Enemy")
@@ -36,15 +36,15 @@ public class ArrowScript : MonoBehaviour
             }
             if(other.gameObject.GetComponent<RangedWarriorScript>() != null)
             {
-                other.gameObject.GetComponent<RangedWarriorScript>().health -= 10;
+                other.gameObject.GetComponent<RangedWarriorScript>().TakeDamage();
             }
             if(other.gameObject.GetComponent<MeleeWarriorScript>() != null)
             {
-                other.gameObject.GetComponent<MeleeWarriorScript>().health -= 10;
+                other.gameObject.GetComponent<MeleeWarriorScript>().TakeDamage();
             }
             if(other.gameObject.GetComponent<AerialUnitScript>() != null)
             {
-                other.gameObject.GetComponent<AerialUnitScript>().health -= 10;
+                other.gameObject.GetComponent<AerialUnitScript>().TakeDamage();
             }
         }
     }
